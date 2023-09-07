@@ -24,12 +24,28 @@ public class UserController {
 //    }
 
     //create user
+    @PostMapping("/create")
+    @PermitAll
+    public User createUser(@RequestBody User user) throws Exception {
+        Set<UserRole> roles=new HashSet<>();
+        Role role=new Role();
+        role.setRoleId(2L);
+        role.setRoleName("NORMAL");
 
+        UserRole userRole=new UserRole();
+        userRole.setUser(user);
+        userRole.setRole(role);
+        roles.add(userRole);
+
+        return this.userService.createUser(user,roles);
+
+
+    }
 
     @GetMapping("/getUsername/{username}")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public User getUsername(@PathVariable ("username") String username){
-        return this.userService.getUsername(username);//
+        return this.userService.getUsername(username);
     }
 
     @DeleteMapping("/delete/{id}")
