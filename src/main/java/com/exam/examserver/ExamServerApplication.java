@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +18,8 @@ public class ExamServerApplication implements CommandLineRunner {
 
     @Autowired
     UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public static void main(String[] args) {
@@ -25,8 +28,8 @@ public class ExamServerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Project is running");
-
+//        System.out.println("Project is running");
+//
 //        User user=new User();
 //
 //        user.setFirstname("nilima");
@@ -35,6 +38,7 @@ public class ExamServerApplication implements CommandLineRunner {
 //        user.setPassword("nilima");
 //        user.setUsername("nilimamaka");
 //        user.setProfile("default.png");
+//        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 //
 //        Role role1=new Role();
 //        role1.setRoleId(1L);
