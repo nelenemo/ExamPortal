@@ -20,7 +20,7 @@ public class Category {
     private String title;
     private String description;
 
-    @OneToMany(mappedBy = "category", fetch =FetchType.EAGER, cascade = CascadeType.ALL) //category column will be made in Quiz table
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL) //category column will be made in Quiz table
     @JsonIgnore
     private Set<Quiz> quizzes=new LinkedHashSet<>(); //order as per insert
 }

@@ -50,7 +50,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername()) //it should be username or user email bcz its unique
                 .setIssuedAt(new Date(System.currentTimeMillis())) //means when this claim was created  helps us to calculate the expiration date or to check if the token is still valid or not
-                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*24)) // token will be valid for 24 hrs + 1000 milliseconds
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 2)) // token will be valid for 24 hrs + 1000 milliseconds
                 .signWith(getSignInkey(), SignatureAlgorithm.HS256) //which key we want to use to sign this token
                 .compact(); //will generate and return the token
     }

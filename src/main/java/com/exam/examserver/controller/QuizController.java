@@ -3,8 +3,12 @@ package com.exam.examserver.controller;
 import com.exam.examserver.entity.exam.Quiz;
 import com.exam.examserver.service.QuizService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/quiz")
@@ -33,9 +37,42 @@ public class QuizController {
         return this.quizService.updateQuiz(quiz);
     }
 
+//    @DeleteMapping("/{qid}")
+//    public ResponseEntity<String> deleteQuiz(@PathVariable ("qid") Long quizId){
+//        this.quizService.deleteQuiz(quizId);
+//        return new ResponseEntity("hello", HttpStatus.OK);
+//    }qid
+
+
+//    @DeleteMapping("/{qid}")
+//    public String deleteQuiz(@PathVariable ("qid") Long qid){
+//        this.quizService.deleteQuiz(qid);
+//        return "the id has been deleted";
+//    }
+
+
+//    @DeleteMapping("/{qid}")
+//    public ResponseEntity<String> deleteQuiz(@PathVariable("qid") Long qid) {
+//        try {
+//            this.quizService.deleteQuiz(qid);
+//            return ResponseEntity.ok("Quiz successfully deleted");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting quiz: " + e.getMessage());
+//        }
+
     @DeleteMapping("/{quizId}")
-    public String deleteQuiz(@PathVariable ("quizId") Long quizId){
-        this.quizService.deleteQuiz(quizId);
-        return "the id has been deleted";
+    public ResponseEntity<Map<String, String>> deleteQuiz(@PathVariable("quizId") Long quizId) {
+        try {
+            this.quizService.deleteQuiz(quizId);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Quiz with ID " + quizId + " has been deleted successfully");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Failed to delete quiz with ID " + quizId);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
+
+
 }

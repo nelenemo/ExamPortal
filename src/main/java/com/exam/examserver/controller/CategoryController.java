@@ -26,7 +26,9 @@ public class CategoryController {
 
     @GetMapping("/")
     public ResponseEntity<?> getCategories(){
-    return  ResponseEntity.ok(this.categotyService.getCategory());
+
+        System.out.println("Calling getCategories from frontend");
+        return  ResponseEntity.ok(this.categotyService.getCategory());
     }
 
     @PutMapping("/")
