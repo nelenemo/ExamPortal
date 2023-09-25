@@ -31,7 +31,10 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public Quiz getQuiz(Long quizId) {
-        return this.quizRepository.findById(quizId).get();
+        System.out.println("IDDDDD"+quizId);
+        Quiz quiz=quizRepository.findById(quizId).get();
+        System.out.println(quiz);
+        return this.quizRepository.findById(quizId).orElseThrow(()->new RuntimeException("ID not found"));
     }
 
     @Override

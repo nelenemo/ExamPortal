@@ -27,14 +27,19 @@ public class CategoryController {
     @GetMapping("/")
     public ResponseEntity<?> getCategories(){
 
+
         System.out.println("Calling getCategories from frontend");
         return  ResponseEntity.ok(this.categotyService.getCategory());
     }
+
+
 
     @PutMapping("/")
     public Category updateCategory(@RequestBody Category category){
         return this.categotyService.updateCategory(category);
     }
+
+
 
     @DeleteMapping("/{categoryId}")
     public String deleteCategory(@PathVariable ("categoryId") Long cid){

@@ -18,6 +18,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
+
+    public static final String[] PUBLIC_URLS={
+            "/generate-token",
+            "/user/create",
+            "/v3/api-docs",//api docs to json access
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/webjars/**"
+
+
+    };
+
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
     //we have created the filter, implemented the user Details Service
@@ -40,7 +52,7 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/generate-token","/user/create")      //white listing: no need for authentication , HttpMethod.OPTIONS.toString()
+                .requestMatchers(PUBLIC_URLS)      //white listing: no need for authentication , HttpMethod.OPTIONS.toString()
                 .permitAll()
                 .requestMatchers("/user/delete") // APIs accessible only to users with "ROLE_ADMIN"
                 .hasAnyRole("NORMAL","ADMIN")

@@ -34,6 +34,7 @@ public class QuizController {
 
     @PutMapping("/")
     public Quiz updateCategory(@RequestBody Quiz quiz){
+
         return this.quizService.updateQuiz(quiz);
     }
 
@@ -60,19 +61,36 @@ public class QuizController {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting quiz: " + e.getMessage());
 //        }
 
-    @DeleteMapping("/{quizId}")
-    public ResponseEntity<Map<String, String>> deleteQuiz(@PathVariable("quizId") Long quizId) {
-        try {
-            this.quizService.deleteQuiz(quizId);
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "Quiz with ID " + quizId + " has been deleted successfully");
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Failed to delete quiz with ID " + quizId);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
+//    @DeleteMapping("/{quizId}")
+//    public ResponseEntity<Map<String, String>> deleteQuiz(@PathVariable("quizId") Long quizId) {
+//        try {
+//            this.quizService.deleteQuiz(quizId);
+//            Map<String, String> response = new HashMap<>();
+//            response.put("message", "Quiz with ID " + quizId + " has been deleted successfully");
+//            return ResponseEntity.ok(response);
+//        } catch (Exception e) {
+//            Map<String, String> response = new HashMap<>();
+//            response.put("error", "Failed to delete quiz with ID " + quizId);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+//        }
+//    }
+
+
+//    @DeleteMapping("/{qid}")
+//    public ResponseEntity<String> deleteQuiz(@PathVariable ("qid") Long qid){
+//        this.quizService.deleteQuiz(qid);
+//        return ResponseEntity.ok("has been deleted"+qid);
+//    }
+    @DeleteMapping("/{qid}")
+
+    public  ResponseEntity<String> deleteQuiz(@PathVariable ("qid") Long qid,String responseMessage, HttpStatus httpStatus) {
+        this.quizService.deleteQuiz(qid);
+        responseMessage="the id has been deleted";
+        httpStatus=HttpStatus.OK;
+        return new ResponseEntity<String>("{\"message\":\"" + responseMessage + "\"}", httpStatus);
     }
+
+
 
 
 }

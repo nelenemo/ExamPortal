@@ -31,26 +31,34 @@ public class QuestionController {
     }
 
     //get all question of a quiz
-    @GetMapping("/quiz/{queId}")
-    public ResponseEntity<?> getQuestionOfQuiz(@PathVariable("quizId") Long quizId) {
-        Quiz quiz = this.quizService.getQuiz(quizId);
-        Set<Question> questions = quiz.getQuestions();
-        List list = new ArrayList(questions);
-        if (list.size() > Integer.parseInt(quiz.getNumberOfQuestions())) {
-            list = list.subList(0, Integer.parseInt(quiz.getNumberOfQuestions() + 1));
-        }
-        Collections.shuffle(list);
-        return ResponseEntity.ok(list);
+    @GetMapping("/quiz/{qid}")
+    public ResponseEntity<?> getQuestionOfQuiz(@PathVariable("qid") Long qid) {
+//        Quiz quiz = this.quizService.getQuiz(qid);
+//        System.out.println("@@@@@@@@@@@@"+ quiz.getQuestions());
+//        Set<Question> questions = quiz.getQuestions();
+//        for(Question question: questions){
+//            String content = question.getContent();
+//            String option1 = question.getOption1();
+//            String option2=question.getOption2();
+//            String option3=question.getOption3();
+//            String option4=question.getOption4();
+//                    }
+//        List list = new ArrayList(questions);
+//        if (list.size() > Integer.parseInt(quiz.getNumberOfQuestions())){
+//            list = list.subList(0, Integer.parseInt(quiz.getNumberOfQuestions() + 1));
+//        }
+//        Collections.shuffle(list);
+//        return ResponseEntity.ok(list);
 
 
 //        if(list.size()>Integer.parseInt(quizService.))
 
 
-//        Quiz quiz=new Quiz();
-//        quiz.setQId(quizId);
-//
-//        Set<Question> questionOfQuiz = this.questionService.getQuestionOfQuiz(quiz);
-//        return ResponseEntity.ok(questionOfQuiz);
+        Quiz quiz=new Quiz();
+        quiz.setQId(qid);
+
+        Set<Question> questionOfQuiz = this.questionService.getQuestionOfQuiz(quiz);
+        return ResponseEntity.ok(questionOfQuiz);
     }
 
 

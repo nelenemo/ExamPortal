@@ -1,0 +1,17 @@
+{
+  "suceessfulResponseAPI": {
+    "code": 200,
+    "Status": "Ok! ",
+    "Message": "Successfully Registered! "
+  },
+  "badResponseAPI": {
+    "code": 400,
+    "Status": "Bad Request ! ",
+    "Message": "Bad Request ! "
+  },
+  "internalServerErrorAPI": {
+    "code": 500,
+    "Status": "Internal Server Error ! ",
+    "Message": "Internal Server Error! "
+  }
+}

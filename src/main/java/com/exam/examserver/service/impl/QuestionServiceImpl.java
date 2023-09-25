@@ -60,6 +60,11 @@ private final QuizRepository quizRepository;
         this.questionRepository.deleteById(questionId);
 
     }
+
+    @Override
+    public Set<Question> getQuestionOfQuiz(Quiz quiz) {
+        return questionRepository.findByQuiz(quiz);
+    }
 }
 
 //  System.out.println(question1.getQueId());
