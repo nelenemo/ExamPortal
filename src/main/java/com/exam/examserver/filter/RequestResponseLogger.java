@@ -52,7 +52,7 @@ public class RequestResponseLogger implements Filter {
 
 
         if("/user/create".equalsIgnoreCase(uri)){
-            User user = objectMapper.readValue(requestData, User.class);
+            User user = objectMapper.readValue(requestData, User.class);//The objectMapper.readValue() method is used to deserialize the jsonContent string into a Java object of type MyPojo.
             user.setPassword("****");
             requestData=objectMapper.writeValueAsString(user);
 

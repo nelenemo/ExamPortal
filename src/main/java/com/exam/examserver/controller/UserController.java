@@ -5,18 +5,11 @@ import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.UserService;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -116,16 +109,20 @@ logger.info("inside user controller calling");
 
 
     @GetMapping ("getAllUsers")
-    public ResponseEntity<?> getalluser(){
-        List<User> allUsers = userRepository.findAll();
-        if (allUsers.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        logger.info("The data of user" + allUsers);
+    public ResponseEntity<List<User>> getalluser(){
+        userService.getAllUser();
 
-        return ResponseEntity.ok(allUsers);
+
+        return ResponseEntity.ok(userService.getAllUser());
     }
+    //    @Cacheable(value="cachestore", key = "'allUsers'")
 
+
+//        List<User> allUsers = userRepository.findAll();
+//        if (allUsers.isEmpty()) {
+//            return ResponseEntity.noContent().build();
+//        }
+//        logger.info("The data of user" + allUsers);
 
 
     @DeleteMapping("/delete/{id}")

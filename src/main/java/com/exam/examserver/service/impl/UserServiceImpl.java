@@ -8,15 +8,24 @@ import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.UserService;
 import jakarta.transaction.Transactional;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
+
+
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private  final RoleRepository roleRepository;
     private final JwtService jwtService;
+    private static final Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, JwtService jwtService) {
         this.userRepository = userRepository;
@@ -59,6 +68,14 @@ public class UserServiceImpl implements UserService {
         this.userRepository.deleteById(id);
     }
 
+    @Cacheable(value = "cachestore",key = "'allUsers'")
+    @Override
+    public List<User> getAllUser() {
+        List<User> all = userRepository.findAll();
+        logger.info("This is working or not - {} ",all);
+
+        return all;
+    }
 
 
 }

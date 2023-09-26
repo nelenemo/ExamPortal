@@ -82,7 +82,6 @@ public class QuizController {
 //        return ResponseEntity.ok("has been deleted"+qid);
 //    }
     @DeleteMapping("/{qid}")
-
     public  ResponseEntity<String> deleteQuiz(@PathVariable ("qid") Long qid,String responseMessage, HttpStatus httpStatus) {
         this.quizService.deleteQuiz(qid);
         responseMessage="the id has been deleted";

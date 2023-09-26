@@ -39,6 +39,11 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 
+    //ehcache
+    implementation group: 'org.ehcache', name: 'ehcache', version: '3.10.8'
+
+
+
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
 
@@ -46,7 +51,7 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20230227'
 // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'commons-io', name: 'commons-io', version: '2.13.0'
-
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
 
 }
 
